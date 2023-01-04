@@ -1,0 +1,16 @@
+{
+    "name": "mdalamin/smartdirectory",
+    "autoload": {
+        "psr-4": {
+            "SmartDirectory\\App\\": "app/",
+            "SmartDirectory\\Bootstrap\\": "bootstrap/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MD AL AMIN",
+            "email": "mdalaminbey@gmail.com"
+        }
+    ],
+    "require": {}
+}
