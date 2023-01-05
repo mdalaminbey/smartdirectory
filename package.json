@@ -2,10 +2,22 @@
   "name": "smartdirectory",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "wp-scripts start",
+    "minify": "wp-scripts build"
   },
-  "author": "",
+  "devDependencies": {
+    "@wordpress/scripts": "^25.0.0",
+    "autoprefixer": "^10.4.13",
+    "css-loader": "^6.7.3",
+    "postcss": "^8.4.20",
+    "postcss-loader": "^7.0.2",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.56.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.2.4"
+  },
   "license": "ISC"
 }
