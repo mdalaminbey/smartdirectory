@@ -4,7 +4,10 @@
         "psr-4": {
             "SmartDirectory\\App\\": "app/",
             "SmartDirectory\\Bootstrap\\": "bootstrap/"
-        }
+        },
+        "files": [
+            "./app/Helpers/helper.php"
+        ]
     },
     "authors": [
         {
