@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Utils;
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\Application;
 
 class Common

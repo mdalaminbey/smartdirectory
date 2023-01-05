@@ -2,9 +2,10 @@
 
 namespace SmartDirectory\Bootstrap\System\Providers;
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\System\Contracts\ServiceProvider;
 use SmartDirectory\Bootstrap\System\Route\RegisterRoute;
-use WP_REST_Server;
 
 final class RouteServiceProvider extends ServiceProvider
 {

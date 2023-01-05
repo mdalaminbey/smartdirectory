@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Configs;
 
+defined( 'ABSPATH' ) || exit;
+
 abstract class Config
 {
     /**

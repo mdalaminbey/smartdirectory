@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Providers;
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\System\Contracts\ServiceProvider;
 
 final class EnqueueServiceProvider extends ServiceProvider

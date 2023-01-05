@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Route;
 
+defined( 'ABSPATH' ) || exit;
+
 class RegisterRoute
 {
     public $namespace;

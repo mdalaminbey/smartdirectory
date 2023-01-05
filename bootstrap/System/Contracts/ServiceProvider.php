@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Contracts;
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\Application;
 
 abstract class ServiceProvider

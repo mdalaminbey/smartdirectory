@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap\System\Route;
 
+defined( 'ABSPATH' ) || exit;
+
 use Closure;
 use SmartDirectory\Bootstrap\Application;
 use SmartDirectory\Bootstrap\System\Contracts\Middleware;

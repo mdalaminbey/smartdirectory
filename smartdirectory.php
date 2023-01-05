@@ -16,6 +16,8 @@
  * Domain Path:       /languages
  */
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\Application;
 
 require_once __DIR__ . '/vendor/autoload.php';

@@ -2,6 +2,8 @@
 
 namespace SmartDirectory\Bootstrap;
 
+defined( 'ABSPATH' ) || exit;
+
 use SmartDirectory\Bootstrap\System\Configs\Config;
 use SmartDirectory\Bootstrap\System\Providers\EnqueueServiceProvider;
 use SmartDirectory\Bootstrap\System\Providers\RouteServiceProvider;
