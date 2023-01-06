@@ -2,7 +2,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use SmartDirectory\App\Providers\Admin\DirectoryCptServiceProvider as AdminDirectoryCptServiceProvider;
 use SmartDirectory\App\Providers\DirectoryCptServiceProvider;
+use SmartDirectory\App\Providers\LocalizationServiceProvider;
 use SmartDirectory\App\Providers\ShortcodeServiceProvider;
 
 return [
@@ -19,17 +21,20 @@ return [
      * Service providers
      */
     'providers'       => [
+        LocalizationServiceProvider::class,
         DirectoryCptServiceProvider::class,
         ShortcodeServiceProvider::class
     ],
 
-    'admin_providers' => [],
+    'admin_providers' => [
+        AdminDirectoryCptServiceProvider::class
+    ],
     /**
      * Plugin Api Namespace
      */
     'namespace'       => 'smart-directory',
 
-    'api_versions'    => [],
+    'api_versions'    => ['v1'],
 
-    'middleware'      => ['v1']
+    'middleware'      => []
 ];

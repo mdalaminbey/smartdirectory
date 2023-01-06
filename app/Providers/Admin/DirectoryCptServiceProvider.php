@@ -5,6 +5,7 @@ namespace SmartDirectory\App\Providers\Admin;
 defined( 'ABSPATH' ) || exit;
 
 use SmartDirectory\Bootstrap\System\Contracts\ServiceProvider;
+use SmartDirectory\Bootstrap\System\View\View;
 use WP_Post;
 
 class DirectoryCptServiceProvider extends ServiceProvider
@@ -36,6 +37,10 @@ class DirectoryCptServiceProvider extends ServiceProvider
      */
     public function action_save_post( int $post_ID, WP_Post $post, bool $update ): void
     {
+        if ( !empty( $_POST['map_link'] ) ) {
+            update_post_meta( $post_ID, 'map_link', sanitize_url( $_POST['map_link'] ) );
+        }
+
         if ( !empty( $_FILES['preview_image']['tmp_name'] ) ) {
 
             if ( !function_exists( 'media_handle_upload' ) ) {
@@ -81,22 +86,12 @@ class DirectoryCptServiceProvider extends ServiceProvider
     {
         if ( smart_directory_post_type() === $post_type ) {
             $this->post = $post;
-            add_meta_box( 'preview_image', esc_html__( 'Preview Image', 'superdirectory' ), [$this, 'metabox_content'] );
+            add_meta_box( 'directory_info', esc_html__( 'Directory Info', 'superdirectory' ), [$this, 'metabox_content'] );
         }
     }
 
     public function metabox_content()
     {
-        $preview_image_id = get_post_meta( $this->post->ID, 'preview_image', true );
-        echo wp_get_attachment_image( $preview_image_id, );
-        ?>
-        <input type='file' name='preview_image'/>
-
-        <!-- WordPress forms do not have an enctype. So we are adding it by js. -->
-        <script>
-            let form = document.getElementById('post');
-            form.setAttribute('enctype', 'multipart/form-data');
-        </script>
-    <?php
+        View::render( 'admin/metabox', ['post_id' => $this->post->ID] );
     }
 }

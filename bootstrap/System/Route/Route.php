@@ -74,13 +74,13 @@ abstract class Route
             }
         ];
 
-        $application = static::get_application_instance();
+        $application = Application::$instance;
 
         /**
          * Create RegisterRoute instance
          * @var RegisterRoute $registerRoute
          */
-        $registerRoute = $application->make( new RegisterRoute );
+        $registerRoute = $application->make( RegisterRoute::class );
         $namespace     = $registerRoute->get_namespace();
         $version       = $registerRoute->get_version();
         if ( $version ) {
