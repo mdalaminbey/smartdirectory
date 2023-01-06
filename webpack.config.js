@@ -5,7 +5,8 @@ const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const js = {
 	...defaultConfig,
 	entry: {
-		'app' : './resources/js/app.js'
+		'app' : './resources/js/app.js',
+		'simplePagination' : './resources/js/simplePagination.js'
 		// add your all js entry
 	},
 	output: {
