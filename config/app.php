@@ -4,6 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 use SmartDirectory\App\Http\Middleware\IsUserLogged;
 use SmartDirectory\App\Providers\Admin\DirectoryCptServiceProvider as AdminDirectoryCptServiceProvider;
+use SmartDirectory\App\Providers\BlockRegisterServiceProvider;
 use SmartDirectory\App\Providers\DirectoryCptServiceProvider;
 use SmartDirectory\App\Providers\LocalizationServiceProvider;
 use SmartDirectory\App\Providers\ShortcodeServiceProvider;
@@ -24,7 +25,8 @@ return [
     'providers'       => [
         LocalizationServiceProvider::class,
         DirectoryCptServiceProvider::class,
-        ShortcodeServiceProvider::class
+        ShortcodeServiceProvider::class,
+        BlockRegisterServiceProvider::class
     ],
 
     'admin_providers' => [

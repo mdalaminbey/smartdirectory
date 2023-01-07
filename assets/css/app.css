@@ -811,9 +811,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.smart-directory .items-center {
-  align-items: center;
-}
 .smart-directory .gap-8 {
   gap: 2rem;
 }
@@ -1005,9 +1002,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .capitalize {
   text-transform: capitalize;
 }
-.smart-directory .leading-6 {
-  line-height: 1.5rem;
-}
 .smart-directory .tracking-wide {
   letter-spacing: 0.025em;
 }
@@ -1058,24 +1052,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .opacity-75 {
   opacity: 0.75;
 }
-.smart-directory .shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
 .smart-directory .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.smart-directory .transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.smart-directory .ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .smart-directory .placeholder\:text-slate-400\/70::-moz-placeholder {
   color: rgb(148 163 184 / 0.7);
@@ -1090,10 +1069,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .hover\:bg-success-hover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(5 150 105 / var(--tw-bg-opacity));
-}
-.smart-directory .hover\:bg-\[\#fd084d\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 8 77 / var(--tw-bg-opacity));
 }
 .smart-directory .hover\:text-\[\#F51957\]:hover {
   --tw-text-opacity: 1;
