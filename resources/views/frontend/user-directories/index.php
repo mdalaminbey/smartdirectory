@@ -15,6 +15,7 @@ $total_posts  = wp_count_posts( smart_directory_post_type() )->publish;
 					<th class="border-b font-semibold p-4 pr-8 pb-3 text-white text-left"><?php esc_html_e('SL', 'smartdirectory')?></th>
 					<th class="border-b font-semibold p-4 pr-8 pb-3 text-white text-left"><?php esc_html_e('Title', 'smartdirectory')?></th>
 					<th class="border-b font-semibold p-4 pr-8 pb-3 text-white text-left"><?php esc_html_e('Content', 'smartdirectory')?></th>
+					<th class="border-b font-semibold p-4 pr-8 pb-3 text-white text-left"><?php esc_html_e('Status', 'smartdirectory')?></th>
 					<th class="border-b font-semibold p-4 pr-8 pb-3 text-white text-left"><?php esc_html_e('Preview', 'smartdirectory')?></th>
 				</tr>
 			</thead>

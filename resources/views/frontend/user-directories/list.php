@@ -24,6 +24,9 @@ $preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
 			<?php echo esc_html($directory->post_content); ?>
 		</td>
 		<td class="border-b border-slate-100 p-4 text-slate-500">
+			<?php echo esc_html($directory->post_status); ?>
+		</td>
+		<td class="border-b border-slate-100 p-4 text-slate-500">
 			<?php echo wp_get_attachment_image($preview_image_id) ?>
 		</td>
 	</tr>
