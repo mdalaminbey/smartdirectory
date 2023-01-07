@@ -9,12 +9,20 @@ use WP_REST_Request;
 
 class DirectoryController
 {
+    public function index()
+    {
+    }
+
+    public function user_directories()
+    {
+    }
+
     public function create( WP_REST_Request $wp_rest_request )
     {
         $validator  = new RequestValidator;
         $validation = $validator->make( [
-            'title'         => 'required|min:10|max:100',
-            'content'       => 'required|min:10|max:1000',
+            'title'         => 'required|min:10|max:50',
+            'content'       => 'required|min:10|max:150',
             'map_link'      => 'required|min:10|max:1000',
             'preview_image' => 'file:png,jpeg|size:500'
         ] );

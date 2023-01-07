@@ -2,6 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use SmartDirectory\App\Http\Middleware\IsUserLogged;
 use SmartDirectory\App\Providers\Admin\DirectoryCptServiceProvider as AdminDirectoryCptServiceProvider;
 use SmartDirectory\App\Providers\DirectoryCptServiceProvider;
 use SmartDirectory\App\Providers\LocalizationServiceProvider;
@@ -36,5 +37,7 @@ return [
 
     'api_versions'    => ['v1'],
 
-    'middleware'      => []
+    'middleware'      => [
+        'is_user_logged' => IsUserLogged::class
+    ]
 ];
