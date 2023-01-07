@@ -42,8 +42,11 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 				<div class="mb-5">
 					<label class="block">
-						<span class="text-base"><?php esc_html_e( 'Preview image', 'smartdirectory' )?></span>
-						<span class="text-danger">*</span>
+						<span class="text-base">
+							<?php esc_html_e( 'Preview image', 'smartdirectory' )?> 
+							<span class="text-danger">*</span> --
+							<span><?php esc_html_e('Dimensions')?>: (800x525) <?php esc_html_e('and size less than or equal to 500kb')?></span>
+						</span>
 						<input type="file" id="preview_image" required name="preview_image" id="preview_image" class="hidden" accept="image/png, image/jpeg" />
 						<div class="preview_body px-7 py-7 mt-1 min-h-[70px] text-gray-500 bg-[#EDF1F7] border-dashed border-2 border-[#CBD5E1] rounded-md">
  							<span class="underline cursor-pointer text-black"><?php esc_html_e( 'Browse Preview Image', 'smartdirectory' )?></span>

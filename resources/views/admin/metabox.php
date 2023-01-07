@@ -1,5 +1,9 @@
 <?php
-    $preview_image_id = get_post_meta( $post_id, 'preview_image', true );
+
+defined( 'ABSPATH' ) || exit;
+
+$preview_image_id = get_post_meta( $post_id, 'preview_image', true );
+
 ?>
 
 <div class="smart-directory">

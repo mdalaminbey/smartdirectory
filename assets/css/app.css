@@ -779,11 +779,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .w-4 {
   width: 1rem;
 }
+.smart-directory .w-6 {
+  width: 1.5rem;
+}
 .smart-directory .w-5 {
   width: 1.25rem;
 }
-.smart-directory .w-6 {
-  width: 1.5rem;
+.smart-directory .table-auto {
+  table-layout: auto;
 }
 .smart-directory .-translate-x-2\/4 {
   --tw-translate-x: -50%;
@@ -807,6 +810,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 .smart-directory .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.smart-directory .items-center {
+  align-items: center;
 }
 .smart-directory .gap-8 {
   gap: 2rem;
@@ -838,6 +844,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .border-2 {
   border-width: 2px;
 }
+.smart-directory .border-b {
+  border-bottom-width: 1px;
+}
 .smart-directory .border-dashed {
   border-style: dashed;
 }
@@ -862,6 +871,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 .smart-directory .border-danger\/90 {
   border-color: rgb(255 87 36 / 0.9);
+}
+.smart-directory .border-\[\#EDF1F7\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(237 241 247 / var(--tw-border-opacity));
+}
+.smart-directory .border-slate-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(241 245 249 / var(--tw-border-opacity));
 }
 .smart-directory .bg-danger\/10 {
   background-color: rgb(255 87 36 / 0.1);
@@ -893,6 +910,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .bg-success {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
+}
+.smart-directory .bg-\[\#EDF1F7\]\/40 {
+  background-color: rgb(237 241 247 / 0.4);
 }
 .smart-directory .fill-white {
   fill: #fff;
@@ -942,14 +962,17 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.smart-directory .pt-2 {
+  padding-top: 0.5rem;
+}
 .smart-directory .pb-3 {
   padding-bottom: 0.75rem;
 }
 .smart-directory .pl-1 {
   padding-left: 0.25rem;
 }
-.smart-directory .pt-2 {
-  padding-top: 0.5rem;
+.smart-directory .pr-8 {
+  padding-right: 2rem;
 }
 .smart-directory .text-left {
   text-align: left;
@@ -981,6 +1004,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 .smart-directory .capitalize {
   text-transform: capitalize;
+}
+.smart-directory .leading-6 {
+  line-height: 1.5rem;
 }
 .smart-directory .tracking-wide {
   letter-spacing: 0.025em;
@@ -1016,6 +1042,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .text-danger\/90 {
   color: rgb(255 87 36 / 0.9);
 }
+.smart-directory .text-slate-500 {
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity));
+}
 .smart-directory .underline {
   text-decoration-line: underline;
 }
@@ -1028,9 +1058,24 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .opacity-75 {
   opacity: 0.75;
 }
+.smart-directory .shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .smart-directory .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.smart-directory .transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.smart-directory .ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .smart-directory .placeholder\:text-slate-400\/70::-moz-placeholder {
   color: rgb(148 163 184 / 0.7);
@@ -1045,6 +1090,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .hover\:bg-success-hover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(5 150 105 / var(--tw-bg-opacity));
+}
+.smart-directory .hover\:bg-\[\#fd084d\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 8 77 / var(--tw-bg-opacity));
 }
 .smart-directory .hover\:text-\[\#F51957\]:hover {
   --tw-text-opacity: 1;

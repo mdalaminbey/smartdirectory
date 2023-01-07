@@ -5,16 +5,25 @@ namespace SmartDirectory\App\Http\Controllers;
 defined( 'ABSPATH' ) || exit;
 
 use SmartDirectory\App\Library\RequestValidator;
+use SmartDirectory\Bootstrap\System\View\View;
 use WP_REST_Request;
 
 class DirectoryController
 {
     public function index()
     {
+        ob_start();
+        View::render( 'frontend/directories/list' );
+        $html = ob_get_clean();
+        wp_send_json( ['html' => $html], 200 );
     }
 
     public function user_directories()
     {
+        ob_start();
+        View::render( 'frontend/user-directories/list' );
+        $html = ob_get_clean();
+        wp_send_json( ['html' => $html], 200 );
     }
 
     public function create( WP_REST_Request $wp_rest_request )

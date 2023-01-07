@@ -91,4 +91,58 @@ jQuery(function ($) {
 			}
 		})
 	});
-})
+
+	function pageUrl(page = '') {
+		let url = new URL(window.location.href);
+		url.searchParams.delete('directory-page');
+		url.searchParams.append('directory-page', page);
+		return url.toString();
+	}
+
+	let $directory_list = $('.directory-list');
+	let url = new URL(window.location.href);
+	let pagination = $('.directory-list-body .pagination');
+
+	pagination.each(item => {
+		let $pagination = $(pagination[item]);
+		$pagination.pagination({
+			currentPage: url.searchParams.get('directory-page'),
+			items: $directory_list.attr('data-total'),
+			itemsOnPage: 12,
+			cssStyle: 'light-theme',
+			hrefTextPrefix: pageUrl(),
+			number: false,
+			onPageClick: function (page, event) {
+				event.preventDefault();
+
+				let $directory_body = $pagination.closest('.directory-list-body');
+
+				/**
+				 * Show preloader
+				 */
+				$directory_body.find('.preloader').show();
+
+				/**
+				 * Replace current url
+				 */
+				window.history.pushState('', '', pageUrl(page))
+
+				$.ajax({
+					'url': SmartDirectorySettings.root + $directory_body.attr('data-api'),
+					method: 'POST',
+					data: { 'directory-page': page },
+					beforeSend: function (xhr) {
+						xhr.setRequestHeader('X-WP-Nonce', SmartDirectorySettings.nonce);
+					},
+					success: function (data) {
+						/**
+						 * Set html content and hide preloader
+						 */
+						$directory_body.find('.directory-list').html(data.html);
+						$directory_body.find('.preloader').hide();
+					}
+				});
+			}
+		});
+	})
+});

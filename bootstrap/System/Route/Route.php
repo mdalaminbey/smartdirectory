@@ -14,8 +14,6 @@ abstract class Route
 {
     protected static $group_configuration = [];
 
-    abstract protected static function get_application_instance(): Application;
-
     public static function group( $prefix_or_configuration, Closure $routes )
     {
         if ( is_string( $prefix_or_configuration ) ) {
@@ -95,7 +93,7 @@ abstract class Route
     protected static function handle_middleware( WP_REST_Request $wp_rest_request, $group_configuration )
     {
         if ( isset( $group_configuration['middleware'] ) && is_array( $group_configuration['middleware'] ) ) {
-            $application       = static::get_application_instance();
+            $application       = Application::$instance;
             $config_middleware = $application::$config['middleware'];
             foreach ( $group_configuration['middleware'] as $middleware ) {
                 if ( isset( $config_middleware[$middleware] ) ) {

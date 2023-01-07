@@ -20,21 +20,29 @@ class ShortcodeServiceProvider extends ServiceProvider
      */
     public function action_init(): void
     {
-        add_shortcode( 'super-directory-form', [$this, 'form_view'] );
-        add_shortcode( 'super-directory-listings', [$this, 'listings_view'] );
+        add_shortcode( 'smart-directory-form', [$this, 'form_view'] );
+        add_shortcode( 'smart-directory-listings', [$this, 'listings_view'] );
+        add_shortcode( 'smart-directory-user-listings', [$this, 'user_listings'] );
     }
 
     public function form_view()
     {
         ob_start();
-        View::render( 'shortcode/form' );
+        View::render( 'frontend/form' );
         return ob_get_clean();
     }
 
     public function listings_view()
     {
         ob_start();
-        View::render( 'shortcode/listings' );
+        View::render( 'frontend/directories/index' );
+        return ob_get_clean();
+    }
+
+    public function user_listings()
+    {
+        ob_start();
+        View::render( 'frontend/user-directories/index' );
         return ob_get_clean();
     }
 }
