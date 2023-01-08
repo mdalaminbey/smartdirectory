@@ -6,14 +6,18 @@ defined( 'ABSPATH' ) || exit;
 $current_page   = isset( $_REQUEST['directory-page'] ) ? intval( $_REQUEST['directory-page'] ) : 1;
 $posts_per_page = 12;
 $offset         = ( $current_page - 1 ) * $posts_per_page;
-$directories    = get_posts( [
+$args           = [
 	'post_type'      => smart_directory_post_type(),
 	'posts_per_page' => $posts_per_page,
 	'offset'         => $offset,
+	'author'         => get_current_user_id(),
 	'post_status'    => ['publish', 'pending', 'draft']
-] );
+];
 
-if(empty($directories)) {
+$wp_query    = new \WP_Query($args);
+$directories = $wp_query->posts;
+
+if( empty( $directories ) ) {
 	echo "No directory found";
 	return;
 }
