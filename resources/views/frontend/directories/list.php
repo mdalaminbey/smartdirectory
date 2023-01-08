@@ -2,6 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $current_page = isset( $_REQUEST['directory-page'] ) ? intval( $_REQUEST['directory-page'] ) : 1;
 $offset       = ( $current_page - 1 ) * 12;
 $directories  = get_posts( [

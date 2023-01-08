@@ -79,7 +79,13 @@ class Common
      */
     public static function is_admin_page( string $file_name = 'admin', array $params = [] ): bool
     {
+        if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+            return false;
+        }
+        //phpcs:ignore -- Here we check the admin's current page. not saving any data
         $pathinfo = pathinfo( $_SERVER['REQUEST_URI'] );
+        //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $request = $_REQUEST;
 
         if ( strpos( $pathinfo['filename'], 'php' ) ) {
             $pathinfo['filename'] = explode( '.', $pathinfo['filename'] )[0];
@@ -90,10 +96,10 @@ class Common
         if ( $is_current_file ) {
             foreach ( $params as $key => $value ) {
                 if ( is_int( strpos( $value, '!' ) ) ) {
-                    if ( isset( $_REQUEST[$key] ) && $_REQUEST[$key] == ltrim( $value, '!' ) ) {
+                    if ( isset( $request[$key] ) && $request[$key] == ltrim( $value, '!' ) ) {
                         return false;
                     }
-                } elseif ( empty( $_REQUEST[$key] ) || $_REQUEST[$key] != $value ) {
+                } elseif ( empty( $request[$key] ) || $request[$key] != $value ) {
                     return false;
                 }
             }

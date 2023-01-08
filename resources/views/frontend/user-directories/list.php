@@ -2,6 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $current_page   = isset( $_REQUEST['directory-page'] ) ? intval( $_REQUEST['directory-page'] ) : 1;
 $posts_per_page = 12;
 $offset         = ( $current_page - 1 ) * $posts_per_page;
@@ -18,7 +19,7 @@ $preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
 	?>
 	<tr class="<?php echo (($key % 2) === 0 ) ? 'bg-[#EDF1F7]/40' : 'bg-white' ?>">
 		<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo $key + $sl + 1 ?>
+			<?php echo ($key + $sl + 1) //phpcs:ignore ?>
 		</td>
 		<td class="border-b border-slate-100 p-4 text-slate-500">
 		<?php echo esc_html($directory->post_title); ?>

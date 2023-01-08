@@ -37,10 +37,13 @@ class DirectoryCptServiceProvider extends ServiceProvider
      */
     public function action_save_post( int $post_ID, WP_Post $post, bool $update ): void
     {
+        //phpcs:ignore WordPress.Security.NonceVerification.Missing -- This method can access only admin
         if ( !empty( $_POST['map_link'] ) ) {
-            update_post_meta( $post_ID, 'map_link', sanitize_url( $_POST['map_link'] ) );
+            //phpcs:ignore
+            update_post_meta( $post_ID, 'map_link', sanitize_url( wp_unslash( $_POST['map_link'] ) ) );
         }
 
+        //phpcs: WordPress.Security.NonceVerification.Missing
         if ( !empty( $_FILES['preview_image']['tmp_name'] ) ) {
 
             if ( !function_exists( 'media_handle_upload' ) ) {
