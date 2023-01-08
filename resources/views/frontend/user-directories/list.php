@@ -17,31 +17,39 @@ $args           = [
 $wp_query    = new \WP_Query($args);
 $directories = $wp_query->posts;
 
-if( empty( $directories ) ) {
-	echo "No directory found";
-	return;
-}
+if(!empty($directories)) {
 
-$sl = ($posts_per_page * $current_page) - $posts_per_page;
+	$sl = ($posts_per_page * $current_page) - $posts_per_page;
 
-foreach($directories as $key => $directory):
-$preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
+	foreach($directories as $key => $directory):
+	$preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
+		?>
+		<tr class="<?php echo (($key % 2) === 0 ) ? 'bg-[#EDF1F7]/40' : 'bg-white' ?>">
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php echo ($key + $sl + 1) //phpcs:ignore ?>
+			</td>
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+			<?php echo esc_html($directory->post_title); ?>
+			</td>
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php echo esc_html($directory->post_content); ?>
+			</td>
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php echo esc_html($directory->post_status); ?>
+			</td>
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php echo wp_get_attachment_image($preview_image_id) ?>
+			</td>
+		</tr>
+<?php 
+	endforeach; 
+} else {
 	?>
-	<tr class="<?php echo (($key % 2) === 0 ) ? 'bg-[#EDF1F7]/40' : 'bg-white' ?>">
-		<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo ($key + $sl + 1) //phpcs:ignore ?>
-		</td>
-		<td class="border-b border-slate-100 p-4 text-slate-500">
-		<?php echo esc_html($directory->post_title); ?>
-		</td>
-		<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo esc_html($directory->post_content); ?>
-		</td>
-		<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo esc_html($directory->post_status); ?>
-		</td>
-		<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo wp_get_attachment_image($preview_image_id) ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+		<tr class="bg-white">
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php esc_html_e('No directory found', 'smartdirectory')?>
+			</td>
+		</tr>
+	<?php
+}
+?>
