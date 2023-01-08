@@ -15,7 +15,7 @@ class DirectoryController
         ob_start();
         View::render( 'frontend/directories/list' );
         $html = ob_get_clean();
-        wp_send_json( ['html' => $html], 200 );
+        return smart_directory_response( ['html' => $html], 200 );
     }
 
     public function user_directories()
@@ -23,13 +23,13 @@ class DirectoryController
         ob_start();
         View::render( 'frontend/user-directories/list' );
         $html = ob_get_clean();
-        wp_send_json( ['html' => $html], 200 );
+        return smart_directory_response( ['html' => $html], 200 );
     }
 
     public function create( WP_REST_Request $wp_rest_request )
     {
         $validator  = new RequestValidator;
-        $validation = $validator->make( [
+        $validation = $validator->make($wp_rest_request, [
             'title'         => 'required|min:10|max:50',
             'content'       => 'required|min:10|max:150',
             'map_link'      => 'required|min:10|max:1000',
@@ -37,7 +37,7 @@ class DirectoryController
         ] );
 
         if ( $validation->fails() ) {
-            wp_send_json( ['messages' => $validation->errors()], 500 );
+            return smart_directory_response( ['messages' => $validation->errors()], 500 );
         } else {
             $post_id = wp_insert_post( [
                 'post_type'    => smart_directory_post_type(),
@@ -62,7 +62,7 @@ class DirectoryController
                 add_post_meta( $post_id, 'preview_image', $preview_image_id );
             }
 
-            wp_send_json( [], 201 );
+            return smart_directory_response([], 201);
         }
     }
 }

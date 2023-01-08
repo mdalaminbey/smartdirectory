@@ -62,10 +62,11 @@ abstract class Route
                     $arguments           = self::dependency_injection( $route, $reflection_function->getParameters(), $wp_rest_request );
                     $response            = $callback( ...$arguments );
                 }
-                if ( $response ) {
+
+                if ( $wp_rest_request->has_param( 'return' ) ) {
                     return $response;
                 }
-                die;
+                wp_send_json( $response['data'], $response['status'] );
             },
             'permission_callback' => function ( WP_REST_Request $wp_rest_request ) use ( $group_configuration ) {
                 return self::handle_middleware( $wp_rest_request, $group_configuration );
@@ -87,7 +88,7 @@ abstract class Route
             $full_path = '/' . $namespace . '/' . $route['path'];
         }
 
-        $registerRoute->wp_rest_server->register_route( $namespace, $full_path, [$args] );
+        rest_get_server()->register_route( $namespace, $full_path, [$args] );
     }
 
     protected static function handle_middleware( WP_REST_Request $wp_rest_request, $group_configuration )

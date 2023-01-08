@@ -31,11 +31,11 @@ final class RouteServiceProvider extends ServiceProvider
 
         $registerRoute->set_namespace( $config['namespace'] );
 
-        include_once $application->get_root_dir() . '/routes/api.php';
+        include $application->get_root_dir() . '/routes/api.php';
 
         foreach ( $config['api_versions'] as $version ) {
             $registerRoute->set_version( $version );
-            include_once $application->get_root_dir() . '/routes/' . $version . '.php';
+            include $application->get_root_dir() . '/routes/' . $version . '.php';
         }
     }
 }

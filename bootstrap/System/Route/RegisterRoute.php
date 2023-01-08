@@ -8,14 +8,7 @@ class RegisterRoute
 {
     public $namespace;
 
-    public $wp_rest_server;
-
     public $version;
-
-    public function __construct()
-    {
-        $this->wp_rest_server = rest_get_server();
-    }
 
     public function set_namespace( $namespace )
     {
