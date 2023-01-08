@@ -11,6 +11,10 @@ $directories  = get_posts( [
 	'offset'         => $offset
 ] );
 
+if(empty($directories)) {
+	echo "No directory found";
+	return;
+}
 foreach($directories as $directory):
 	$preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
 ?>

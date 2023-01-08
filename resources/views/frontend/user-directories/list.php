@@ -9,8 +9,14 @@ $offset         = ( $current_page - 1 ) * $posts_per_page;
 $directories    = get_posts( [
 	'post_type'      => smart_directory_post_type(),
 	'posts_per_page' => $posts_per_page,
-	'offset'         => $offset
+	'offset'         => $offset,
+	'post_status'    => ['publish', 'pending', 'draft']
 ] );
+
+if(empty($directories)) {
+	echo "No directory found";
+	return;
+}
 
 $sl = ($posts_per_page * $current_page) - $posts_per_page;
 
