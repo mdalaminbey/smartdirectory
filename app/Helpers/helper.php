@@ -9,6 +9,11 @@ function smart_directory_post_type()
     return Application::$config['post_types']['directory'];
 }
 
+function smart_directory_response( $data, $status = 200 )
+{
+    return compact('data', 'status');
+}
+
 function smart_directory_kses_allowed()
 {
     return [
