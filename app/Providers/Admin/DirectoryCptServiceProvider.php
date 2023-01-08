@@ -89,7 +89,7 @@ class DirectoryCptServiceProvider extends ServiceProvider
     {
         if ( smart_directory_post_type() === $post_type ) {
             $this->post = $post;
-            add_meta_box( 'directory_info', esc_html__( 'Directory Info', 'superdirectory' ), [$this, 'metabox_content'] );
+            add_meta_box( 'directory_info', esc_html__( 'Directory Info', 'smartdirectory' ), [$this, 'metabox_content'] );
         }
     }
 
