@@ -15,5 +15,7 @@
             "email": "mdalaminbey@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "yoast/phpunit-polyfills": "^1.0"
+    }
 }
