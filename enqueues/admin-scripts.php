@@ -16,7 +16,7 @@ global $current_screen;
 /**
  * Load directory add new page script
  */
-if ( isset( $current_screen->id ) && 'smart-directory_page_smart-directory-add-new' === $current_screen->id ) {
+if ( isset( $current_screen->id ) && ( 'smart-directory_page_smart-directory-add-new' === $current_screen->id || 'smart-directory_page_smart-directory-listings' === $current_screen->id ) ) {
 	wp_enqueue_media();
 	wp_enqueue_script( 'smart-directory-js', Common::asset( 'js/admin/app.js' ), array( 'jquery' ), Common::version(), true );
 }
