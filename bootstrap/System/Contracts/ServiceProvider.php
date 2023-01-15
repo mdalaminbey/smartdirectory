@@ -15,5 +15,10 @@ abstract class ServiceProvider
         $this->application = $application;
     }
 
+    /**
+	 * The boot method is called immediately after the service provider calls the constructor
+	 *
+	 * @return void
+	 */
     abstract public function boot();
 }

@@ -14,6 +14,30 @@ function smart_directory_response( $data, $status = 200 )
     return compact('data', 'status');
 }
 
+function smart_directory_count_total() {
+    global $wpdb;
+
+    $counts = wp_cache_get( 'smart-directories-total' );
+
+    if ( ! empty( $counts ) ) {
+        return $counts;
+    }
+
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $results = $wpdb->get_results( "SELECT status, COUNT( * ) AS num_posts FROM {$wpdb->prefix}smart_directories WHERE 1=1 GROUP BY status", ARRAY_A );
+
+    $counts = array('all' => 0);
+
+    foreach ( $results as $row ) {
+        $counts[$row['status']] = $row['num_posts'];
+        $counts['all']         += $row['num_posts'];
+    }
+
+    wp_cache_set( 'smart-directories-total', $counts );
+    
+    return $counts;
+}
+
 function smart_directory_kses_allowed()
 {
     return [

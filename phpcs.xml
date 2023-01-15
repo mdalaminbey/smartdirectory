@@ -13,14 +13,14 @@
 	<exclude-pattern>dev-*</exclude-pattern>
 	<exclude-pattern>node_modules/*</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
-
-    <rule ref="WordPress.Security">
-        <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine"/>
+	<rule ref="WordPress.Security"></rule>
+	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName"/>
-		<exclude name="WordPress.Arrays"/>
-		<exclude name="WordPress.NamingConventions.ValidVariableName"/>
-		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
-    </rule>
+		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="Generic.Commenting.DocComment.MissingShort"/>
+		<exclude name="Squiz.Commenting.VariableComment.Missing"/>
+	</rule>
 
 	<rule ref="PSR2.Methods.FunctionClosingBrace"/>
 

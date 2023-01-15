@@ -43,7 +43,7 @@ jQuery(function ($) {
 		$submit_button.find('svg').show();
 
 		$.ajax({
-			'url': SmartDirectorySettings.root + 'smart-directory/v1/directory/create',
+			url: SmartDirectorySettings.root + 'smart-directory/v1/directories',
 			method: 'POST',
 			processData: false,
 			contentType: false,
@@ -102,47 +102,50 @@ jQuery(function ($) {
 	let $directory_list = $('.directory-list');
 	let url = new URL(window.location.href);
 	let pagination = $('.directory-list-body .pagination');
+	let total_directory = $directory_list.attr('data-total');
+	let directory_per_page = 12;
 
-	pagination.each(item => {
-		let $pagination = $(pagination[item]);
-		$pagination.pagination({
-			currentPage: url.searchParams.get('directory-page'),
-			items: $directory_list.attr('data-total'),
-			itemsOnPage: 12,
-			cssStyle: 'light-theme',
-			hrefTextPrefix: pageUrl(),
-			number: false,
-			onPageClick: function (page, event) {
-				event.preventDefault();
+	if (parseInt(total_directory) > directory_per_page) {
+		pagination.each(item => {
+			let $pagination = $(pagination[item]);
+			$pagination.pagination({
+				currentPage: url.searchParams.get('directory-page'),
+				items: total_directory,
+				itemsOnPage: directory_per_page,
+				cssStyle: 'light-theme',
+				hrefTextPrefix: pageUrl(),
+				number: false,
+				onPageClick: function (page, event) {
+					event.preventDefault();
 
-				let $directory_body = $pagination.closest('.directory-list-body');
+					let $directory_body = $pagination.closest('.directory-list-body');
 
-				/**
-				 * Show preloader
-				 */
-				$directory_body.find('.preloader').show();
+					/**
+					 * Show preloader
+					 */
+					$directory_body.find('.preloader').show();
 
-				/**
-				 * Replace current url
-				 */
-				window.history.pushState('', '', pageUrl(page))
+					/**
+					 * Replace current url
+					 */
+					window.history.pushState('', '', pageUrl(page))
 
-				$.ajax({
-					'url': SmartDirectorySettings.root + $directory_body.attr('data-api'),
-					method: 'POST',
-					data: { 'directory-page': page },
-					beforeSend: function (xhr) {
-						xhr.setRequestHeader('X-WP-Nonce', SmartDirectorySettings.nonce);
-					},
-					success: function (data) {
-						/**
-						 * Set html content and hide preloader
-						 */
-						$directory_body.find('.directory-list').html(data.html);
-						$directory_body.find('.preloader').hide();
-					}
-				});
-			}
-		});
-	})
+					$.ajax({
+						url: SmartDirectorySettings.root + $directory_body.attr('data-api'),
+						data: { 'directory-page': page },
+						beforeSend: function (xhr) {
+							xhr.setRequestHeader('X-WP-Nonce', SmartDirectorySettings.nonce);
+						},
+						success: function (data) {
+							/**
+							 * Set html content and hide preloader
+							 */
+							$directory_body.find('.directory-list').html(data.html);
+							$directory_body.find('.preloader').hide();
+						}
+					});
+				}
+			});
+		})
+	}
 });

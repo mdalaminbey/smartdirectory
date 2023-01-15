@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.directory-status {
+	@apply px-3 py-1 text-white text-sm rounded-md font-semibold capitalize select-none;
+}
+
+.directory-status-approved {
+	@apply bg-success;
+}
+
+.directory-status-rejected {
+	@apply bg-danger;
+}
+
+.directory-status-pending {
+	@apply bg-yellow-500;
+}

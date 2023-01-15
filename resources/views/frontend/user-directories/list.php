@@ -1,53 +1,57 @@
-<?php 
+<?php
 
 defined( 'ABSPATH' ) || exit;
 
 //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-$current_page   = isset( $_REQUEST['directory-page'] ) ? intval( $_REQUEST['directory-page'] ) : 1;
-$posts_per_page = 12;
-$offset         = ( $current_page - 1 ) * $posts_per_page;
-$args           = [
-	'post_type'      => smart_directory_post_type(),
-	'posts_per_page' => $posts_per_page,
-	'offset'         => $offset,
-	'author'         => get_current_user_id(),
-	'post_status'    => ['publish', 'pending', 'draft']
-];
+$current_page       = ! empty( $_REQUEST['directory-page'] ) ? intval( $_REQUEST['directory-page'] ) : 1;
+$directory_per_page = 12;
+if ( $current_page < 1 ) {
+	$current_page = 1;
+}
 
-$wp_query    = new \WP_Query($args);
-$directories = $wp_query->posts;
+$offset = ( $current_page - 1 ) * $directory_per_page;
+global $wpdb;
 
-if(!empty($directories)) {
+//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+$directories = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}smart_directories WHERE author_id=%d LIMIT %d OFFSET %d", get_current_user_id(), $directory_per_page, $offset ) );
 
-	$sl = ($posts_per_page * $current_page) - $posts_per_page;
+if ( ! empty( $directories ) ) {
 
-	foreach($directories as $key => $directory):
-	$preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
+	$sl = ( $directory_per_page * $current_page ) - $directory_per_page;
+
+	foreach ( $directories as $key => $directory ) :
+
+		$preview_image_id = get_post_meta( $directory->ID, 'preview_image', true );
 		?>
-		<tr class="<?php echo (($key % 2) === 0 ) ? 'bg-[#EDF1F7]/40' : 'bg-white' ?>">
+		<tr class="<?php echo ( ( $key % 2 ) === 0 ) ? 'bg-[#EDF1F7]/40' : 'bg-white'; ?>">
 			<td class="border-b border-slate-100 p-4 text-slate-500">
 				<?php echo ($key + $sl + 1) //phpcs:ignore ?>
 			</td>
 			<td class="border-b border-slate-100 p-4 text-slate-500">
-			<?php echo esc_html($directory->post_title); ?>
+			<?php echo esc_html( $directory->title ); ?>
 			</td>
 			<td class="border-b border-slate-100 p-4 text-slate-500">
-				<?php echo esc_html($directory->post_content); ?>
+				<?php echo esc_html( $directory->content ); ?>
 			</td>
 			<td class="border-b border-slate-100 p-4 text-slate-500">
-				<?php echo esc_html($directory->post_status); ?>
+				<span class="directory-status directory-status-<?php echo esc_attr( $directory->status ); ?>">
+					<?php echo esc_html( $directory->status ); ?>
+				</span>
 			</td>
 			<td class="border-b border-slate-100 p-4 text-slate-500">
-				<?php echo wp_get_attachment_image($preview_image_id) ?>
+				<?php echo wp_get_attachment_image( $directory->preview_image_id ); ?>
+			</td>
+			<td class="border-b border-slate-100 p-4 text-slate-500">
+				<?php echo esc_html( $directory->submission_date ); ?>
 			</td>
 		</tr>
-<?php 
-	endforeach; 
+		<?php
+	endforeach;
 } else {
 	?>
 		<tr class="bg-white">
 			<td class="border-b border-slate-100 p-4 text-slate-500">
-				<?php esc_html_e('No directory found', 'smartdirectory')?>
+				<?php esc_html_e( 'No directory found', 'smartdirectory' ); ?>
 			</td>
 		</tr>
 	<?php

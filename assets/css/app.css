@@ -689,6 +689,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .relative {
   position: relative;
 }
+.smart-directory .left-2\/4 {
+  left: 50%;
+}
 .smart-directory .top-1\.5 {
   top: 0.375rem;
 }
@@ -701,9 +704,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .left-1 {
   left: 0.25rem;
 }
-.smart-directory .left-2\/4 {
-  left: 50%;
-}
 .smart-directory .top-2\/4 {
   top: 50%;
 }
@@ -712,6 +712,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 }
 .smart-directory .mb-2 {
   margin-bottom: 0.5rem;
+}
+.smart-directory .mt-4 {
+  margin-top: 1rem;
+}
+.smart-directory .mr-5 {
+  margin-right: 1.25rem;
+}
+.smart-directory .mb-4 {
+  margin-bottom: 1rem;
+}
+.smart-directory .mb-5 {
+  margin-bottom: 1.25rem;
 }
 .smart-directory .mt-1\.5 {
   margin-top: 0.375rem;
@@ -722,20 +734,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .mt-2 {
   margin-top: 0.5rem;
 }
-.smart-directory .mt-4 {
-  margin-top: 1rem;
-}
-.smart-directory .mb-5 {
-  margin-bottom: 1.25rem;
-}
-.smart-directory .mt-3 {
-  margin-top: 0.75rem;
-}
 .smart-directory .-ml-1 {
   margin-left: -0.25rem;
 }
 .smart-directory .mr-3 {
   margin-right: 0.75rem;
+}
+.smart-directory .mt-3 {
+  margin-top: 0.75rem;
 }
 .smart-directory .mt-6 {
   margin-top: 1.5rem;
@@ -758,23 +764,35 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .hidden {
   display: none;
 }
-.smart-directory .h-60 {
-  height: 15rem;
+.smart-directory .h-0 {
+  height: 0px;
 }
 .smart-directory .h-5 {
   height: 1.25rem;
 }
+.smart-directory .h-60 {
+  height: 15rem;
+}
 .smart-directory .h-6 {
   height: 1.5rem;
+}
+.smart-directory .min-h-0 {
+  min-height: 0px;
 }
 .smart-directory .min-h-\[70px\] {
   min-height: 70px;
 }
-.smart-directory .w-40 {
-  width: 10rem;
+.smart-directory .w-\[800px\] {
+  width: 800px;
 }
 .smart-directory .w-full {
   width: 100%;
+}
+.smart-directory .\!w-full {
+  width: 100% !important;
+}
+.smart-directory .w-0 {
+  width: 0px;
 }
 .smart-directory .w-4 {
   width: 1rem;
@@ -785,8 +803,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .w-5 {
   width: 1.25rem;
 }
+.smart-directory .min-w-0 {
+  min-width: 0px;
+}
+.smart-directory .max-w-full {
+  max-width: 100%;
+}
 .smart-directory .table-auto {
   table-layout: auto;
+}
+.smart-directory .-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .smart-directory .-translate-x-2\/4 {
   --tw-translate-x: -50%;
@@ -820,14 +848,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .rounded-md {
   border-radius: 0.375rem;
 }
+.smart-directory .rounded {
+  border-radius: 0.25rem;
+}
 .smart-directory .rounded-lg {
   border-radius: 0.5rem;
 }
 .smart-directory .rounded-sm {
   border-radius: 0.125rem;
-}
-.smart-directory .rounded {
-  border-radius: 0.25rem;
 }
 .smart-directory .rounded-full {
   border-radius: 9999px;
@@ -854,6 +882,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .border-\[\#F51957\]\/50 {
   border-color: rgb(245 25 87 / 0.5);
 }
+.smart-directory .border-success {
+  --tw-border-opacity: 1;
+  border-color: rgb(16 185 129 / var(--tw-border-opacity));
+}
 .smart-directory .border-slate-300 {
   --tw-border-opacity: 1;
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
@@ -861,10 +893,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .border-\[\#CBD5E1\] {
   --tw-border-opacity: 1;
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
-}
-.smart-directory .border-success {
-  --tw-border-opacity: 1;
-  border-color: rgb(16 185 129 / var(--tw-border-opacity));
 }
 .smart-directory .border-danger\/90 {
   border-color: rgb(255 87 36 / 0.9);
@@ -887,9 +915,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .bg-transparent {
   background-color: transparent;
 }
-.smart-directory .bg-\[\#EDF1F7\] {
+.smart-directory .bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(237 241 247 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .smart-directory .bg-success\/20 {
   background-color: rgb(16 185 129 / 0.2);
@@ -897,16 +925,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .bg-danger\/5 {
   background-color: rgb(255 87 36 / 0.05);
 }
-.smart-directory .bg-slate-700\/25 {
-  background-color: rgb(51 65 85 / 0.25);
-}
-.smart-directory .bg-white {
+.smart-directory .bg-\[\#EDF1F7\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(237 241 247 / var(--tw-bg-opacity));
+}
+.smart-directory .bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 .smart-directory .bg-success {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
+}
+.smart-directory .bg-slate-700\/25 {
+  background-color: rgb(51 65 85 / 0.25);
 }
 .smart-directory .bg-\[\#EDF1F7\]\/40 {
   background-color: rgb(237 241 247 / 0.4);
@@ -914,11 +946,17 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .fill-white {
   fill: #fff;
 }
-.smart-directory .p-7 {
-  padding: 1.75rem;
+.smart-directory .p-5 {
+  padding: 1.25rem;
 }
 .smart-directory .p-4 {
   padding: 1rem;
+}
+.smart-directory .p-0 {
+  padding: 0px;
+}
+.smart-directory .p-7 {
+  padding: 1.75rem;
 }
 .smart-directory .p-2 {
   padding: 0.5rem;
@@ -935,6 +973,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.smart-directory .px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
 .smart-directory .py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
@@ -943,9 +985,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.smart-directory .px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+.smart-directory .px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 .smart-directory .px-7 {
   padding-left: 1.75rem;
@@ -955,9 +997,17 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
 }
-.smart-directory .px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
+.smart-directory .pb-10 {
+  padding-bottom: 2.5rem;
+}
+.smart-directory .pb-2 {
+  padding-bottom: 0.5rem;
+}
+.smart-directory .pt-4 {
+  padding-top: 1rem;
+}
+.smart-directory .pb-1 {
+  padding-bottom: 0.25rem;
 }
 .smart-directory .pt-2 {
   padding-top: 0.5rem;
@@ -974,10 +1024,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .text-left {
   text-align: left;
 }
-.smart-directory .text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
 .smart-directory .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -986,6 +1032,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.smart-directory .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 .smart-directory .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -993,11 +1043,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .font-medium {
   font-weight: 500;
 }
-.smart-directory .font-bold {
-  font-weight: 700;
-}
 .smart-directory .font-semibold {
   font-weight: 600;
+}
+.smart-directory .font-bold {
+  font-weight: 700;
 }
 .smart-directory .capitalize {
   text-transform: capitalize;
@@ -1009,29 +1059,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   --tw-text-opacity: 1;
   color: rgb(245 25 87 / var(--tw-text-opacity));
 }
-.smart-directory .text-danger {
-  --tw-text-opacity: 1;
-  color: rgb(255 87 36 / var(--tw-text-opacity));
-}
-.smart-directory .text-slate-700 {
-  --tw-text-opacity: 1;
-  color: rgb(51 65 85 / var(--tw-text-opacity));
-}
 .smart-directory .text-success {
   --tw-text-opacity: 1;
   color: rgb(16 185 129 / var(--tw-text-opacity));
 }
-.smart-directory .text-gray-500 {
+.smart-directory .text-danger {
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: rgb(255 87 36 / var(--tw-text-opacity));
+}
+.smart-directory .text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .smart-directory .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
-.smart-directory .text-white {
+.smart-directory .text-slate-700 {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: rgb(51 65 85 / var(--tw-text-opacity));
+}
+.smart-directory .text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 .smart-directory .text-danger\/90 {
   color: rgb(255 87 36 / 0.9);
@@ -1046,45 +1096,96 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .smart-directory .\!no-underline {
   text-decoration-line: none !important;
 }
+.smart-directory .opacity-0 {
+  opacity: 0;
+}
 .smart-directory .opacity-25 {
   opacity: 0.25;
 }
 .smart-directory .opacity-75 {
   opacity: 0.75;
 }
+.smart-directory .ring-1 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.smart-directory .ring-slate-900\/10 {
+  --tw-ring-color: rgb(15 23 42 / 0.1);
+}
 .smart-directory .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
+.smart-directory .directory-status {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.smart-directory .directory-status-approved {
+  --tw-bg-opacity: 1;
+  background-color: rgb(16 185 129 / var(--tw-bg-opacity));
+}
+
+.smart-directory .directory-status-rejected {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 87 36 / var(--tw-bg-opacity));
+}
+
+.smart-directory .directory-status-pending {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
 .smart-directory .placeholder\:text-slate-400\/70::-moz-placeholder {
   color: rgb(148 163 184 / 0.7);
 }
+
 .smart-directory .placeholder\:text-slate-400\/70::placeholder {
   color: rgb(148 163 184 / 0.7);
 }
+
 .smart-directory .hover\:border-slate-400:hover {
   --tw-border-opacity: 1;
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
 }
+
 .smart-directory .hover\:bg-success-hover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(5 150 105 / var(--tw-bg-opacity));
 }
+
 .smart-directory .hover\:text-\[\#F51957\]:hover {
   --tw-text-opacity: 1;
   color: rgb(245 25 87 / var(--tw-text-opacity));
 }
+
 .smart-directory .focus\:border-primary:focus {
   --tw-border-opacity: 1;
   border-color: rgb(79 70 229 / var(--tw-border-opacity));
 }
+
 .smart-directory .focus\:bg-success-hover:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(5 150 105 / var(--tw-bg-opacity));
 }
+
 .smart-directory .active\:bg-success-hover\/90:active {
   background-color: rgb(5 150 105 / 0.9);
 }
+
 @media (min-width: 1024px) {
 
   .lg\:text-base {

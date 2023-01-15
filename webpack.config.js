@@ -6,6 +6,7 @@ const js = {
 	...defaultConfig,
 	entry: {
 		'app': './resources/js/app.js',
+		'admin/app': './resources/js/admin/app.js',
 		'simplePagination': './resources/js/simplePagination.js',
 		'block': './resources/js/block.js'
 		// add your all js entry
