@@ -36,6 +36,11 @@ abstract class Route
         static::register( $path, $callback, 'POST' );
     }
 
+    public static function patch( string $path, $callback ): void
+    {
+        static::register( $path, $callback, 'PATCH' );
+    }
+
     private static function register( string $path, $callback, $method ): void
     {
         $group_configuration = self::$group_configuration;
