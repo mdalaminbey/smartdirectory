@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       SmartDirectory
  * Plugin URI:        http://wordpress.org/plugins/smartdirectory/
@@ -19,22 +18,31 @@
 defined( 'ABSPATH' ) || exit;
 
 use SmartDirectory\Bootstrap\Application;
+use SmartDirectory\Bootstrap\System\Activation;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-class SmartDirectory
-{
-    public static function boot()
-    {
-        $app = Application::instance();
+class SmartDirectory {
 
-        /**
-         * Fires once activated plugins have loaded.
-         */
-        add_action( 'plugins_loaded', function () use ( $app ): void {
-            $app->boot( __DIR__, __FILE__ );
-        } );
-    }
+	/**
+	 * Boot plugin
+	 *
+	 * @return void
+	 */
+	public static function boot() {
+		$app = Application::instance();
+
+		register_activation_hook( __FILE__, array( new Activation(), 'execute' ) );
+		/**
+		 * Fires once activated plugins have loaded.
+		 */
+		add_action(
+			'plugins_loaded',
+			function () use ( $app ): void {
+				$app->boot( __DIR__, __FILE__ );
+			}
+		);
+	}
 }
 
 SmartDirectory::boot();
