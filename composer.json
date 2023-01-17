@@ -17,5 +17,8 @@
     ],
     "require-dev": {
         "yoast/phpunit-polyfills": "^1.0"
+    },
+    "require": {
+        "psr/container": "^2.0"
     }
 }
