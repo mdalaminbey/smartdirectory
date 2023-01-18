@@ -13,25 +13,20 @@ use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface {
 
-	private array $entries = array();
+	public array $entries = array();
 
 	/**
 	 * Finds an entry of the container by its identifier and returns it or create and returns it.
 	 *
-	 * @param string $class Identifier of the entry to look for.
+	 * @param string|object $class Identifier of the entry to look for.
 	 *
 	 * @return mixed Entry.
 	 */
-	public function get( string $class ) {
+	public function get( $class ) {
 
-		if ( $this->has( $class ) ) {
+		if (is_string($class) && $this->has( $class ) ) {
 
 			$entry = $this->entries[ $class ];
-
-			if ( is_callable( $entry ) ) {
-
-				return $entry( $this );
-			}
 
 			$class = $entry;
 		}
@@ -54,29 +49,25 @@ class Container implements ContainerInterface {
 	}
 
 	/**
-	 * Undocumented function
+	 * Bind dependency
 	 *
-	 * @param string          $class Identifier of the entry to look for.
-	 * @param callable|string $concrete Set able class.
+	 * @param string $class Identifier of the entry to look for.
 	 * @return void
 	 */
-	public function set( string $class, $concrete = null ): void {
-		if ( is_null( $concrete ) ) {
-			$concrete = $class;
-		}
+	public function set( string $class, string $concrete ): void {
 		$this->entries[ $class ] = $concrete;
 	}
 
 	/**
 	 * Resolve class
 	 *
-	 * @param string $class $class Identifier of the entry to look for.
+	 * @param string|object $class $class Identifier of the entry to look for.
 	 *
 	 * @throws ContainerException Error while retrieving the entry.
 	 *
 	 * @return mixed
 	 */
-	public function resolve_class( string $class ) {
+	public function resolve_class( $class ) {
 		// 1. Inspect the class that we are trying to get from the container
 		$refection_class = new \ReflectionClass( $class );
 

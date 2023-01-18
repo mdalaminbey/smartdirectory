@@ -20,6 +20,7 @@
 		<exclude name="Squiz.Commenting.FileComment.Missing"/>
 		<exclude name="Generic.Commenting.DocComment.MissingShort"/>
 		<exclude name="Squiz.Commenting.VariableComment.Missing"/>
+		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents" />
 	</rule>
 
 	<rule ref="PSR2.Methods.FunctionClosingBrace"/>

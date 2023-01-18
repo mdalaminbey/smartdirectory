@@ -5,6 +5,8 @@
  * @package Smartdirectory
  */
 
+use SmartDirectory\Bootstrap\System\Activation;
+
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
@@ -36,3 +38,9 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
 // Start up the WP testing environment.
 require "{$_tests_dir}/includes/bootstrap.php";
+
+/**
+ * Create smart_directories db table
+ */
+$activation = new Activation();
+$activation->execute();
