@@ -13,8 +13,8 @@ use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface {
 
-	public array $entries = array();
-
+	public array $entries   = array();
+	public array $instances = array();
 	/**
 	 * Finds an entry of the container by its identifier and returns it or create and returns it.
 	 *
@@ -26,9 +26,7 @@ class Container implements ContainerInterface {
 
 		if ( is_string( $class ) && $this->has( $class ) ) {
 
-			$entry = $this->entries[ $class ];
-
-			$class = $entry;
+			$class = $this->entries[ $class ];
 		}
 
 		return $this->resolve_class( $class );
@@ -55,8 +53,21 @@ class Container implements ContainerInterface {
 	 * @param string $concrete
 	 * @return void
 	 */
-	public function set( string $class, string $concrete ): void {
+	public function bind( string $class, string $concrete ): void {
 		$this->entries[ $class ] = $concrete;
+	}
+
+	public function singleton( string $class ) {
+
+		if ( isset( $this->instances[ $class ] ) ) {
+			return $this->instances[ $class ];
+		}
+
+		$instance = $this->resolve_class( $class, true );
+
+		$this->instances[ $class ] = $instance;
+
+		return $instance;
 	}
 
 	/**
@@ -68,7 +79,7 @@ class Container implements ContainerInterface {
 	 *
 	 * @return mixed
 	 */
-	public function resolve_class( $class ) {
+	protected function resolve_class( $class, $singleton = false ) {
 		// 1. Inspect the class that we are trying to get from the container
 		$refection_class = new \ReflectionClass( $class );
 
@@ -92,7 +103,7 @@ class Container implements ContainerInterface {
 
 		// 4. If the constructor parameter is a class then try to resolve that class using the container
 		$dependencies = array_map(
-			function( \ReflectionParameter $parameter ) use ( $class ) {
+			function( \ReflectionParameter $parameter ) use ( $class, $singleton ) {
 				$type = $parameter->getType();
 
 				$name = $parameter->getName();
@@ -102,6 +113,10 @@ class Container implements ContainerInterface {
 				}
 
 				if ( $type instanceof \ReflectionNamedType && ! $type->isBuiltin() ) {
+
+					if ( $singleton ) {
+						return $this->singleton( $type->getName() );
+					}
 					return $this->get( $type->getName() );
 				}
 

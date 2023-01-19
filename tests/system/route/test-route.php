@@ -30,7 +30,7 @@ class RouteTest extends WP_UnitTestCase {
 		 *
 		 * @var RegisterRoute $register_route
 		 */
-		$register_route = Application::$instance->make( RegisterRoute::class );
+		$register_route = Application::$container->singleton( RegisterRoute::class );
 		$version        = $register_route->get_version();
 
 		$namespace = '/smart-directory';

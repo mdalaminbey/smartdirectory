@@ -18,16 +18,16 @@ final class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function action_rest_api_init(): void {
 
-		$application = $this->application::$instance;
-
-		$config = $application::$config;
+		$application = $this->application;
+		$config      = $application::$config;
+		$container   = $application::$container;
 
 		/**
 		* Create RegisterRoute instance
 		*
 		* @var RegisterRoute $register_route
 		*/
-		$register_route = $application->make( RegisterRoute::class );
+		$register_route = $container->singleton( RegisterRoute::class );
 
 		$register_route->set_namespace( $config['namespace'] );
 

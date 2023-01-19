@@ -21,8 +21,7 @@ final class Application extends Config {
 
 	public static $instance;
 	public static $config;
-	protected static $instances = array();
-	protected static $is_boot   = false;
+	protected static $is_boot = false;
 	protected static $root_dir;
 	protected static $root_url;
 	public static Container $container;
@@ -89,7 +88,7 @@ final class Application extends Config {
 			/**
 			 * @var ServiceProvider $provider_object
 			 */
-			$provider_object = static::$container->get( $provider );
+			$provider_object = static::$container->singleton( $provider );
 			$provider_object->boot();
 		}
 	}
@@ -106,7 +105,7 @@ final class Application extends Config {
 				/**
 				 * @var ServiceProvider $provider_object
 				 */
-				$provider_object = static::$container->get( $provider );
+				$provider_object = static::$container->singleton( $provider );
 				$provider_object->boot( static::$instance );
 			}
 		}
@@ -115,7 +114,7 @@ final class Application extends Config {
 			/**
 			 * @var ServiceProvider $provider_object
 			 */
-			$provider_object = static::$container->get( $provider );
+			$provider_object = static::$container->singleton( $provider );
 			$provider_object->boot( static::$instance );
 		}
 	}
@@ -149,19 +148,6 @@ final class Application extends Config {
 	 */
 	public function get_root_url(): string {
 		return static::$root_url;
-	}
-
-	/**
-	 * Create class and stores inside static instances variable.
-	 *
-	 * @param string $class php class.
-	 * @return mixed
-	 */
-	public function make( $class ) {
-		if ( empty( static::$instances[ $class ] ) ) {
-			static::$instances[ $class ] = new $class();
-		}
-		return static::$instances[ $class ];
 	}
 
 	/**

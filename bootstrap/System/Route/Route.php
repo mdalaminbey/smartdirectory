@@ -108,14 +108,12 @@ class Route {
 			},
 		);
 
-		$application = Application::$instance;
-
 		/**
 		 * Create RegisterRoute instance
 		 *
 		 * @var RegisterRoute $register_route
 		 */
-		$register_route = $application->make( RegisterRoute::class );
+		$register_route = Application::$container->singleton( RegisterRoute::class );
 		$namespace      = $register_route->get_namespace();
 		$version        = $register_route->get_version();
 		$route          = static::format_api_regex( $path );

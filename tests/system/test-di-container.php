@@ -28,7 +28,7 @@ class DiContainerTest extends WP_UnitTestCase {
 	 */
 	public function test_binding() {
 
-		$this->container->set( PaymentGateway::class, StripePaymentGateway::class );
+		$this->container->bind( PaymentGateway::class, StripePaymentGateway::class );
 
 		$this->assertArrayHasKey( PaymentGateway::class, $this->container->entries );
 
