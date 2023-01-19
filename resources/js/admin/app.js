@@ -86,4 +86,46 @@ jQuery(function ($) {
 			$('.smart-directory #preview_image').trigger('change');
 		})
 	});
+
+	$('.tablenav #doaction').on('click', function(e) {
+
+		let value = $('#bulk-action-selector-top').val();
+
+		if( 'delete_all_with_attachment' === value ) {
+			return confirm("Are you want to delete directories with attachment?");
+		}
+
+		if( 'delete_all' === value ) {
+			return confirm("Are you want to delete directories?");
+		}
+		
+		return true;
+	});
+
+
+	$('.row-actions .delete a').on('click', function(e) {
+
+		let confirm_status = false;
+
+		e.preventDefault();
+
+		confirm_status = confirm("Are you want to delete the directory?");
+
+		if( confirm_status ) {
+			location.href = this.href;
+		}
+	});
+
+	$('.row-actions .delete-with-attachment a').on('click', function(e) {
+
+		let confirm_status = false;
+
+		e.preventDefault();
+
+		confirm_status = confirm("Are you want to delete directory with attachment?");
+
+		if( confirm_status ) {
+			location.href = this.href;
+		}
+	});
 });

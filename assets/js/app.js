@@ -41,7 +41,7 @@ jQuery(function ($) {
     $submit_button.css('cursor', 'not-allowed');
     $submit_button.find('svg').show();
     $.ajax({
-      'url': SmartDirectorySettings.root + 'smart-directory/v1/directories',
+      url: SmartDirectorySettings.root + 'smart-directory/v1/directories',
       method: 'POST',
       processData: false,
       contentType: false,
