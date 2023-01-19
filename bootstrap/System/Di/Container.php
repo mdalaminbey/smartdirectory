@@ -57,15 +57,27 @@ class Container implements ContainerInterface {
 		$this->entries[ $class ] = $concrete;
 	}
 
+	/**
+	 * Singleton
+	 *
+	 * @param string $class
+	 * @return mixed
+	 */
 	public function singleton( string $class ) {
 
 		if ( isset( $this->instances[ $class ] ) ) {
 			return $this->instances[ $class ];
 		}
 
+		$key = $class;
+
+		if ( $this->has( $key ) ) {
+			$class = $this->entries[ $key ];
+		}
+
 		$instance = $this->resolve_class( $class, true );
 
-		$this->instances[ $class ] = $instance;
+		$this->instances[ $key ] = $instance;
 
 		return $instance;
 	}

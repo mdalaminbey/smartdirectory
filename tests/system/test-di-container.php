@@ -76,6 +76,40 @@ class DiContainerTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test dependency singleton
+	 *
+	 * @return void
+	 */
+	public function test_singleton() {
+
+		$dependency_class = $this->container->singleton( DependencyClass::class );
+
+		$dependency_class->dependency_class_one->set_value( 'Hello World' );
+
+		$dependency_class_one = $this->container->singleton( DependencyClassOne::class );
+
+		$this->assertSame( 'Hello World', $dependency_class_one->get_value() );
+	}
+
+	/**
+	 * Test binding dependency
+	 *
+	 * @return void
+	 */
+	public function test_bind_singleton() {
+
+		$this->container->bind( PaymentGateway::class, StripePaymentGateway::class );
+
+		$stripe_payment_gateway = $this->container->singleton( StripePaymentGateway::class );
+
+		$stripe_payment_gateway->set_customer_id( 10 );
+
+		$stripe_payment_gateway_two = $this->container->singleton( StripePaymentGateway::class );
+
+		$this->assertSame( 10, $stripe_payment_gateway_two->get_customer_id() );
+	}
+
+	/**
 	 * Test dependency with nested
 	 *
 	 * @return void
@@ -96,12 +130,24 @@ class DiContainerTest extends WP_UnitTestCase {
 interface PaymentGateway {
 
 	public function charge( float $amount);
+	public function set_customer_id( int $id );
+	public function get_customer_id();
 }
 
 class StripePaymentGateway implements PaymentGateway {
 
+	private $customer_id;
+
 	public function charge( float $amount ) {
 		return 'Stripe charged ' . $amount . '$ amount';
+	}
+
+	public function set_customer_id( int $id ) {
+		$this->customer_id = $id;
+	}
+
+	public function get_customer_id() {
+		return $this->customer_id;
 	}
 }
 
@@ -126,7 +172,17 @@ class DependencyClassOne {
 
 	public $stripe_payment_gateway;
 
+	private $value;
+
 	public function __construct( StripePaymentGateway $stripe_payment_gateway ) {
 		$this->stripe_payment_gateway = $stripe_payment_gateway;
+	}
+
+	public function set_value( string $value ) {
+		$this->value = $value;
+	}
+
+	public function get_value() {
+		return $this->value;
 	}
 }
