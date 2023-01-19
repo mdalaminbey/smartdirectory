@@ -4,15 +4,17 @@ use SmartDirectory\Bootstrap\System\View\View;
 
 defined( 'ABSPATH' ) || exit;
 
-global $wpdb;
-
-// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-$results = $wpdb->get_results( $wpdb->prepare( "SELECT COUNT( * ) AS num_posts FROM {$wpdb->prefix}smart_directories WHERE author_id=%d", get_current_user_id() ) );
-
-$total_directory = isset( $results[0]->num_posts ) ? $results[0]->num_posts : 0;
 ?>
 <div class="smart-directory directory-list-body" data-api="smart-directory/v1/directories/user-directories">
-	<?php if ( is_user_logged_in() ) { ?>
+	<?php
+	if ( is_user_logged_in() ) {
+
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results         = $wpdb->get_results( $wpdb->prepare( "SELECT COUNT( * ) AS num_posts FROM {$wpdb->prefix}smart_directories WHERE author_id=%d", get_current_user_id() ) );
+		$total_directory = isset( $results[0]->num_posts ) ? $results[0]->num_posts : 0;
+		?>
 	<div class="overflow-hidden">
 		<table class="border border-[#EDF1F7] table-auto w-full text-base">
 			<thead class="bg-[#F51957]">
@@ -26,7 +28,7 @@ $total_directory = isset( $results[0]->num_posts ) ? $results[0]->num_posts : 0;
 				</tr>
 			</thead>
 			<tbody class="directory-list" data-total="<?php echo esc_attr( $total_directory ); ?>">
-				<?php View::render( 'frontend/user-directories/list' ); ?>
+			<?php View::render( 'frontend/user-directories/list' ); ?>
 			</tbody>
 		</table>
 	</div>
