@@ -19,6 +19,7 @@ final class Activation {
 	 * @return array
 	 */
 	public function execute() {
+
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();

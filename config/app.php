@@ -22,10 +22,6 @@ return array(
 	 */
 	'version'         => '1.0.0',
 
-	'post_types'      => array(
-		'directory' => 'directory',
-	),
-
 	/**
 	 * Service providers
 	 */

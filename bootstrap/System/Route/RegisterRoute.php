@@ -4,29 +4,25 @@ namespace SmartDirectory\Bootstrap\System\Route;
 
 defined( 'ABSPATH' ) || exit;
 
-class RegisterRoute
-{
-    public $namespace;
+class RegisterRoute {
 
-    public $version;
+	public $namespace;
 
-    public function set_namespace( $namespace )
-    {
-        $this->namespace = trim( $namespace, '/' );
-    }
+	public $version;
 
-    public function get_namespace()
-    {
-        return $this->namespace;
-    }
+	public function set_namespace( $namespace ) {
+		$this->namespace = trim( $namespace, '/' );
+	}
 
-    public function set_version( $version )
-    {
-        $this->version = trim( $version, '/' );
-    }
+	public function get_namespace() {
+		return $this->namespace;
+	}
 
-    public function get_version()
-    {
-        return $this->version;
-    }
+	public function set_version( $version ) {
+		$this->version = trim( $version, '/' );
+	}
+
+	public function get_version() {
+		return $this->version;
+	}
 }

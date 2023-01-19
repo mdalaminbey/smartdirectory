@@ -29,6 +29,7 @@ class ListTable extends WP_List_Table {
 	 * @param array|string $args Array or string of arguments.
 	 */
 	public function __construct( $args = array() ) {
+
 		parent::__construct( $args );
 
 		$this->top_page          = 'smart-directory_page';
@@ -55,6 +56,7 @@ class ListTable extends WP_List_Table {
 	 * @return void
 	 */
 	public function prepare_data( string $search = '' ) {
+
 		$this->per_page        = $this->get_items_per_page( 'directory_per_page' );
 		$this->current_status  = $this->get_current_status();
 		$this->current_page_no = $this->get_pagenum();
@@ -70,6 +72,7 @@ class ListTable extends WP_List_Table {
 	 * @return array
 	 */
 	public function get_columns() {
+
 		$columns = array(
 			'cb'              => '<input type="checkbox" />',
 			'title'           => esc_html__( 'Title', 'smartdirectory' ),
@@ -90,6 +93,7 @@ class ListTable extends WP_List_Table {
 	 * @return array
 	 */
 	protected function get_views() {
+
 		$counts = smart_directory_count_total();
 		$links  = array();
 		foreach ( $counts as $status => $count ) {
@@ -102,6 +106,7 @@ class ListTable extends WP_List_Table {
 	 * Prepares the list of items for displaying.
 	 */
 	public function prepare_items() {
+
 		$hidden_columns_meta_key = "manage{$this->top_page}_{$this->current_page_slug}columnshidden";
 
 		$hidden_columns = get_user_meta( get_current_user_id(), $hidden_columns_meta_key, true );
@@ -137,6 +142,7 @@ class ListTable extends WP_List_Table {
 	 * @param string       $column_name db column name.
 	 */
 	protected function column_default( $item, $column_name ) {
+
 		switch ( $column_name ) {
 			case 'title':
 				return '<strong>' . $item[ $column_name ] . '</strong>';
@@ -165,6 +171,7 @@ class ListTable extends WP_List_Table {
 	 * @return array
 	 */
 	protected function get_sortable_columns() {
+
 		$sortable_columns = array(
 			'title'           => array( 'title', true ),
 			'status'          => array( 'status', true ),
@@ -186,6 +193,7 @@ class ListTable extends WP_List_Table {
 	 *                if the current column is not the primary column.
 	 */
 	protected function handle_row_actions( $item, $column_name, $primary ) {
+
 		if ( $column_name !== $primary ) {
 			return;
 		}
@@ -209,6 +217,7 @@ class ListTable extends WP_List_Table {
 	 * @return array
 	 */
 	protected function get_bulk_actions() {
+
 		$actions = array(
 			'delete_all'                 => esc_html__( 'Delete', 'smartdirectory' ),
 			'delete_all_with_attachment' => esc_html__( 'Delete With Attachment', 'smartdirectory' ),
@@ -239,6 +248,7 @@ class ListTable extends WP_List_Table {
 	 * @return array
 	 */
 	private function get_table_data( $search = '' ) {
+
 		global $wpdb;
 
 		$order   = $this->get_request_value( 'order', array( 'asc', 'desc' ), 'asc' );
@@ -326,6 +336,7 @@ class ListTable extends WP_List_Table {
 	 * @return void
 	 */
 	public function process_bulk_action( array $request ) {
+
 		if ( empty( $request['element'] ) ) {
 			return;
 		}
@@ -394,6 +405,7 @@ class ListTable extends WP_List_Table {
 	 * @return void
 	 */
 	private function delete_items( array $ids, bool $with_attachment = false ) {
+
 		global $wpdb;
 
 		$query = $wpdb->prepare( "FROM {$wpdb->prefix}smart_directories WHERE ID = %d", $ids[0] );
@@ -429,6 +441,7 @@ class ListTable extends WP_List_Table {
 	 * @return void
 	 */
 	private function update_status( array $ids, string $status = 'approved' ) {
+
 		global $wpdb;
 
 		$query = $wpdb->prepare( "UPDATE {$wpdb->prefix}smart_directories SET status = %s WHERE ID = %d", $status, $ids[0], );

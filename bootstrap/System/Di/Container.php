@@ -24,7 +24,7 @@ class Container implements ContainerInterface {
 	 */
 	public function get( $class ) {
 
-		if (is_string($class) && $this->has( $class ) ) {
+		if ( is_string( $class ) && $this->has( $class ) ) {
 
 			$entry = $this->entries[ $class ];
 
@@ -52,6 +52,7 @@ class Container implements ContainerInterface {
 	 * Bind dependency
 	 *
 	 * @param string $class Identifier of the entry to look for.
+	 * @param string $concrete
 	 * @return void
 	 */
 	public function set( string $class, string $concrete ): void {

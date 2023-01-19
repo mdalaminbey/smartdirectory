@@ -48,7 +48,9 @@ class DirectoryController {
 	 * @return array
 	 */
 	public function create( WP_REST_Request $wp_rest_request ) {
-		$validator  = new RequestValidator();
+
+		$validator = new RequestValidator();
+
 		$validation = $validator->make(
 			$wp_rest_request,
 			array(

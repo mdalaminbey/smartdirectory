@@ -30,6 +30,7 @@ class SmartDirectory {
 	 * @return void
 	 */
 	public static function boot() {
+
 		$app = Application::instance();
 
 		register_activation_hook( __FILE__, array( new Activation(), 'execute' ) );
@@ -39,7 +40,12 @@ class SmartDirectory {
 		add_action(
 			'plugins_loaded',
 			function () use ( $app ): void {
+
+				do_action( 'before_load_smart_directory' );
+
 				$app->boot( __DIR__, __FILE__ );
+
+				do_action( 'after_load_smart_directory' );
 			}
 		);
 	}

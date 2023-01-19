@@ -45,6 +45,7 @@ final class Application extends Config {
 	 * @return void
 	 */
 	public function boot( string $root_dir, string $root_file ) {
+
 		if ( static::$is_boot ) {
 			return;
 		}
@@ -83,6 +84,7 @@ final class Application extends Config {
 	 * @return void
 	 */
 	private function run_system_provider() {
+
 		foreach ( $this->get_system_provider() as $provider ) {
 			/**
 			 * @var ServiceProvider $provider_object
@@ -98,6 +100,7 @@ final class Application extends Config {
 	 * @return void
 	 */
 	public function run_provider() {
+
 		if ( is_admin() ) {
 			foreach ( static::$config['admin_providers'] as $provider ) {
 				/**

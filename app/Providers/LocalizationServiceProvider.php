@@ -36,6 +36,7 @@ class LocalizationServiceProvider extends ServiceProvider {
 	 * Prints scripts or data in the head tag on the front end.
 	 */
 	public function action_wp_head(): void {
+
 		$args = array(
 			'root'  => esc_url_raw( rest_url() ),
 			'nonce' => wp_create_nonce( 'wp_rest' ),

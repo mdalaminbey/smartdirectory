@@ -31,6 +31,7 @@ class MenuServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function boot() {
+
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 		add_filter( 'set_screen_option_directory_per_page', array( $this, 'set_per_page' ), 10, 3 );
 	}
@@ -59,6 +60,7 @@ class MenuServiceProvider extends ServiceProvider {
 	 * Fires before the administration menu loads in the admin.
 	 */
 	public function action_admin_menu(): void {
+
 		add_menu_page( esc_html__( 'Smart Directory', 'smartdirectory' ), esc_html__( 'Smart Directory', 'smartdirectory' ), 'manage_options', 'smartdirectory-menu', function () {}, 'dashicons-list-view', 5 );
 
 		$listing_page_hook = add_submenu_page( 'smartdirectory-menu', esc_html__( 'All listings', 'superdocs' ), esc_html__( 'All listings', 'superdocs' ), 'manage_options', 'smart-directory-listings', array( $this, 'listings' ) );
@@ -93,6 +95,7 @@ class MenuServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function screen() {
+
 		if ( isset( $_REQUEST['action'] ) && isset( $_REQUEST['element'] ) && isset( $_REQUEST['_row_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_row_nonce'] ) ), 'smart-directory-row' ) ) {
 
 			$action = sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
@@ -130,6 +133,7 @@ class MenuServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function screen_options() {
+
 		$this->list_table = new ListTable();
 
 		$args = array(
