@@ -97,7 +97,7 @@ class ListTable extends WP_List_Table {
 		$counts = smart_directory_count_total();
 		$links  = array();
 		foreach ( $counts as $status => $count ) {
-			$links[ $status ] = '<a href="admin.php?page=smart-directory-listings&status=' . $status . '" class="' . ( ( $status === $this->current_status ) ? 'current' : '' ) . '" aria-current="page">' . ucfirst( $status ) . ' <span class="count">' . $count . '</span></a>';
+			$links[ $status ] = '<a href="' . admin_url( 'admin.php?page=smart-directory-listings' ) . '&status=' . $status . '" class="' . ( ( $status === $this->current_status ) ? 'current' : '' ) . '" aria-current="page">' . ucfirst( $status ) . ' <span class="count">' . $count . '</span></a>';
 		}
 		return $links;
 	}
