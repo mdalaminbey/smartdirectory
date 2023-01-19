@@ -106,4 +106,15 @@ class Common {
 
 		return false;
 	}
+
+	public static function remove_action( string $hook_name, string $class_name, string $method_name, int $priority = 10 ) {
+		self::remove_filter( $hook_name, $class_name, $method_name, $priority );
+	}
+
+	public static function remove_filter( string $hook_name, string $class_name, string $method_name, int $priority = 10 ) {
+		$container      = Application::$container;
+		$class_instance = $container->singleton( $class_name );
+		remove_filter( $hook_name, array( $class_instance, $method_name ), $priority );
+	}
+
 }
