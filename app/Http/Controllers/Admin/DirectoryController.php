@@ -49,7 +49,6 @@ class DirectoryController {
 
 			global $wpdb;
 
-			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}smart_directories (title, content, map_link, author_id, preview_image_id, submission_date, status )
@@ -101,7 +100,6 @@ class DirectoryController {
 
 			global $wpdb;
 
-			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->prefix}smart_directories SET title = %s, content = %s, map_link = %s, author_id = %d, preview_image_id = %d WHERE ID = %d",

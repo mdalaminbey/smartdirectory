@@ -102,8 +102,8 @@ class MenuServiceProvider extends ServiceProvider {
 			switch ( $action ) {
 				case 'edit':
 					global $wpdb;
+
 					$post_id = sanitize_text_field( wp_unslash( $_REQUEST['element'] ) );
-					//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 					$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}smart_directories WHERE ID = %d", $post_id ) );
 
 					if ( isset( $results[0] ) ) {

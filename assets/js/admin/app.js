@@ -5,6 +5,7 @@ var __webpack_exports__ = {};
   \***********************************/
 jQuery(function ($) {
   let uploaded_image;
+  $(".smart-directory-wrap input[name='_wp_http_referer']").remove();
   $('.smart-directory .create-directory-form').on('submit', function (e) {
     e.preventDefault();
     let $form = $(this);

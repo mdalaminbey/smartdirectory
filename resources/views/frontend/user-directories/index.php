@@ -11,7 +11,6 @@ defined( 'ABSPATH' ) || exit;
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results         = $wpdb->get_results( $wpdb->prepare( "SELECT COUNT( * ) AS num_posts FROM {$wpdb->prefix}smart_directories WHERE author_id=%d", get_current_user_id() ) );
 		$total_directory = isset( $results[0]->num_posts ) ? $results[0]->num_posts : 0;
 		?>

@@ -27,7 +27,6 @@
 	<!-- Rule: in $wpdb->prepare - %s is used for string placeholders and %d is used for integer
 		 placeholders. Note that they are not 'quoted'! -->
 	<rule ref="WordPress.DB.PreparedSQLPlaceholders"/>
-	<rule ref="WordPress.DB.DirectDatabaseQuery" />
 
 	<!-- Covers rule:  $wpdb->prepare()... The benefit of this is that we don't have to remember
 		 to manually use esc_sql(), and also that it is easy to see at a glance whether something

@@ -10,10 +10,10 @@ if ( $current_page < 1 ) {
 }
 
 $offset = ( $current_page - 1 ) * $directory_per_page;
+
 global $wpdb;
 
-//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-$directories = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}smart_directories WHERE author_id=%d LIMIT %d OFFSET %d", get_current_user_id(), $directory_per_page, $offset ) );
+$directories = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}smart_directories WHERE author_id=%d ORDER BY ID DESC LIMIT %d OFFSET %d", get_current_user_id(), $directory_per_page, $offset ) );
 
 if ( ! empty( $directories ) ) {
 

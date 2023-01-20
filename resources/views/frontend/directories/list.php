@@ -13,8 +13,7 @@ $offset = ( $current_page - 1 ) * $directory_per_page;
 
 global $wpdb;
 
-//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-$directories = $wpdb->get_results( $wpdb->prepare( "SELECT ID, title, content, preview_image_id, map_link FROM {$wpdb->prefix}smart_directories WHERE status = 'approved' LIMIT %d OFFSET %d", $directory_per_page, $offset ) );
+$directories = $wpdb->get_results( $wpdb->prepare( "SELECT ID, title, content, preview_image_id, map_link FROM {$wpdb->prefix}smart_directories WHERE status = 'approved' ORDER BY ID DESC LIMIT %d OFFSET %d", $directory_per_page, $offset ) );
 
 if ( empty( $directories ) ) {
 	echo 'No directory found';

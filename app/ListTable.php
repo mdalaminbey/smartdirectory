@@ -22,6 +22,8 @@ class ListTable extends WP_List_Table {
 	private $table_data;
 	private $top_page;
 	private $current_page_slug;
+	private $counts;
+	public $search = '';
 
 	/**
 	 * Constructor.
@@ -36,31 +38,30 @@ class ListTable extends WP_List_Table {
 		$this->current_page_slug = 'smart-directory-listings';
 
 		$nonce_action = "bulk-{$this->top_page}_{$this->current_page_slug}";
-		$search       = '';
 
 		if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), $nonce_action ) ) {
 			/**
 			 * Sending request arguments to avoid nonce reverification
 			 */
 			$this->process_bulk_action( $_REQUEST );
-			$search = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
+			$this->search = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
 		}
 
-		$this->prepare_data( $search );
+		$this->prepare_data();
 	}
 
 	/**
 	 * Preparing the required data for the table
 	 *
-	 * @param string $search directory search.
 	 * @return void
 	 */
-	public function prepare_data( string $search = '' ) {
+	public function prepare_data() {
 
+		$this->counts          = smart_directory_count_total();
 		$this->per_page        = $this->get_items_per_page( 'directory_per_page' );
 		$this->current_status  = $this->get_current_status();
 		$this->current_page_no = $this->get_pagenum();
-		$this->table_data      = $this->get_table_data( $search );
+		$this->table_data      = $this->get_table_data();
 	}
 
 	/**
@@ -123,8 +124,7 @@ class ListTable extends WP_List_Table {
 		/**
 		 * Pagination
 		 */
-		$counts = smart_directory_count_total();
-		$total  = isset( $counts[ $this->current_status ] ) ? $counts[ $this->current_status ] : 0;
+		$total = isset( $this->counts[ $this->current_status ] ) ? $this->counts[ $this->current_status ] : 0;
 
 		$this->set_pagination_args(
 			array(
@@ -244,49 +244,71 @@ class ListTable extends WP_List_Table {
 	/**
 	 * Get table data form DB
 	 *
-	 * @param string $search directory search.
 	 * @return array
 	 */
-	private function get_table_data( $search = '' ) {
+	private function get_table_data() {
 
 		global $wpdb;
 
-		$order   = $this->get_request_value( 'order', array( 'asc', 'desc' ), 'asc' );
+		$order   = $this->get_request_value( 'order', array( 'asc', 'desc' ), 'desc' );
 		$orderby = $this->get_request_value( 'orderby', array( 'ID', 'title', 'status' ), 'ID' );
 
 		$query = "SELECT directory.*, user.display_name as author_name FROM {$wpdb->prefix}smart_directories AS directory LEFT JOIN {$wpdb->prefix}users AS user ON directory.author_id = user.ID";
 
 		if ( 'all' !== $this->current_status ) {
-			$query .= $wpdb->prepare( ' WHERE status=%s', $this->current_status );
+			$status_query = $wpdb->prepare( ' WHERE status=%s', $this->current_status );
 		} else {
-			$query .= ' WHERE 1=1';
+			$status_query = ' WHERE 1=1';
 		}
+
+		$query .= $status_query;
 
 		$offset = ( $this->current_page_no - 1 ) * $this->per_page;
         // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$pagination_query = $wpdb->prepare( "ORDER BY directory.{$orderby} {$order} LIMIT %d OFFSET %d", $this->per_page, $offset );
 
-		if ( ! empty( $search ) ) {
-			$search = "%{$search}%";
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		if ( ! empty( $this->search ) ) {
+
+			$search = "%{$this->search}%";
+
+			/**
+			 * Count search results
+			 */
+			$count = $wpdb->get_var(
+				$wpdb->prepare(
+					//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $status_query Already prepared
+					"SELECT COUNT(*) FROM {$wpdb->prefix}smart_directories AS directory LEFT JOIN {$wpdb->prefix}users AS user ON directory.author_id = user.ID {$status_query} AND (
+                    directory.title LIKE %s OR
+                    directory.content LIKE %s OR
+                    directory.status LIKE %s OR
+                    user.display_name LIKE %s)",
+					$search,
+					$search,
+					$search,
+					$search
+				)
+			);
+
+			$this->counts[ $this->current_status ] = $count;
+
 			return $wpdb->get_results(
 				$wpdb->prepare(
 					//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $query Already prepared
 					"{$query} AND (
-                    directory.title Like %s OR
-                    directory.content Like %s OR
-                    directory.status Like %s OR
-                    user.display_name Like %s) {$pagination_query}", //phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $pagination_query Already prepared
+                    directory.title LIKE %s OR
+                    directory.content LIKE %s OR
+                    directory.status LIKE %s OR
+                    user.display_name LIKE %s) {$pagination_query}", //phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $pagination_query Already prepared
 					$search,
 					$search,
 					$search,
-					$search, //phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $pagination_query Already prepared
+					$search //phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $pagination_query Already prepared
 				),
 				ARRAY_A
 			);
 		} else {
 			// $query and $pagination_query already prepared
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			return $wpdb->get_results( "{$query} {$pagination_query}", ARRAY_A );
 		}
 	}
@@ -309,6 +331,7 @@ class ListTable extends WP_List_Table {
 	 * @return string|bool
 	 */
 	public function get_request_value( string $needle, array $haystack, $default = false ) {
+
 		$status = $default;
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Already verified in the constructor
@@ -420,7 +443,7 @@ class ListTable extends WP_List_Table {
 			$select_query = 'SELECT * ' . $query;
 
 			// $select_query variable already prepared
-			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
+			//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$results = $wpdb->get_results( $select_query, ARRAY_A );
 
 			foreach ( $results as $directory ) {
@@ -429,7 +452,7 @@ class ListTable extends WP_List_Table {
 			}
 		}
 		// $query variable already prepared
-        //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
+        //phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$wpdb->query( 'DELETE ' . $query );
 	}
 
@@ -453,7 +476,7 @@ class ListTable extends WP_List_Table {
 		}
 
 		// $query variable already prepared
-        //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
+        //phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$wpdb->query( $query );
 	}
 
